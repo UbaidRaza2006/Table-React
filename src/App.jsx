@@ -157,21 +157,27 @@ function App() {
           </table>
         )}
 
-        {modalIsOpen && selectedRow && (
-          <div style={modalOverlayStyle} onClick={handleOverlayClick}>
-            <div style={modalContentStyle}>
-              <h2 style={modalHeadingStyle}>Details for {selectedRow.Name}</h2>
-              <p><strong>Roll No:</strong> {selectedRow["Roll No"]}</p>
-              <p><strong>Email:</strong> {selectedRow["Email Address"]}</p>
-              <p><strong>Class:</strong> {selectedRow["SELECT YOUR CLASS"]}</p>
-              <p><strong>Category:</strong> {selectedRow["CATEGORY"]}</p>
-              <p><strong>Website:</strong> <a href={selectedRow["WEBSITE DEPLOYED LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>View</a></p>
-              <p><strong>GitHub:</strong> <a href={selectedRow["GITHUB LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>Repo</a></p>
-              <p><strong>Demo Video:</strong> {selectedRow["DEMO VIDEO LINK"] ? <a href={selectedRow["DEMO VIDEO LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>Watch</a> : "Not Available"}</p>
-              <button onClick={closeModal} style={closeButtonStyle}>Close</button>
-            </div>
-          </div>
-        )}
+{modalIsOpen && selectedRow && (
+  <div style={modalOverlayStyle} onClick={handleOverlayClick}>
+    <div style={modalContentStyle}>
+      <div style={modalHeaderStyle}>
+        <h2 style={modalHeadingStyle}>Details for {selectedRow.Name}</h2>
+        <button onClick={closeModal} style={closeButtonStyle}>×</button>
+      </div>
+      <div style={modalBodyStyle}>
+        <div style={modalInfoStyle}>
+          <p><strong>Roll No:</strong> <span style={modalTextStyle}>{selectedRow["Roll No"]}</span></p>
+          <p><strong>Email:</strong> <span style={modalTextStyle}>{selectedRow["Email Address"]}</span></p>
+          <p><strong>Class:</strong> <span style={modalTextStyle}>{selectedRow["SELECT YOUR CLASS"]}</span></p>
+          <p><strong>Category:</strong> <span style={modalTextStyle}>{selectedRow["CATEGORY"]}</span></p>
+          <p><strong>Website:</strong> <a href={selectedRow["WEBSITE DEPLOYED LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>View</a></p>
+          <p><strong>GitHub:</strong> <a href={selectedRow["GITHUB LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>Repo</a></p>
+          <p><strong>Demo Video:</strong> {selectedRow["DEMO VIDEO LINK"] ? <a href={selectedRow["DEMO VIDEO LINK"]} target="_blank" rel="noreferrer" style={modalLinkStyle}>Watch</a> : "Not Available"}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );
@@ -218,14 +224,14 @@ const selectStyle = {
   display: 'block', // Ensure it's a block element to center it
 };
 
-const tableStyle = {
-  width: '100%',
-  borderCollapse: 'collapse',
-  marginTop: '20px',
-  backgroundColor: '#fff',
-  borderRadius: '5px',
-  boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
-};
+// const tableStyle = {
+//   width: '100%',
+//   borderCollapse: 'collapse',
+//   marginTop: '20px',
+//   backgroundColor: '#fff',
+//   borderRadius: '5px',
+//   boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+// };
 
 const tableHeaderStyle = {
   backgroundColor: '#2980b9',
@@ -234,14 +240,25 @@ const tableHeaderStyle = {
   textAlign: 'left',
 };
 
+const tableStyle = {
+  width: '100%',
+  borderCollapse: 'collapse',
+  marginTop: '20px',
+  backgroundColor: '#fff',
+  borderRadius: '10px', // Increased border radius
+  boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+  overflow: 'hidden', // Ensures border radius is applied correctly
+};
+
 const tableRowStyle = {
   borderBottom: '1px solid #ddd',
 };
 
 const tableCellStyle = {
-  padding: '10px',
+  padding: '15px', // Increased padding for greater height
   color: '#333',
 };
+
 
 const actionContainerStyle = {
   display: 'flex',
@@ -268,7 +285,7 @@ const modalOverlayStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: 'rgba(0, 0, 0, 0.75)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -276,34 +293,87 @@ const modalOverlayStyle = {
 };
 
 const modalContentStyle = {
-  backgroundColor: '#fff',
-  padding: '20px',
-  borderRadius: '10px',
-  boxShadow: '0px 8px 40px rgba(0, 0, 0, 0.15)',
-  width: '80%',
+  backgroundColor: '#bad4d7',
+  padding: '30px',
+  borderRadius: '15px',
+  boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+  width: '90%',  // Keep width at 90%
   maxWidth: '600px',
+  position: 'relative',
+  boxSizing: 'border-box', // Include padding in width
+};
+
+const modalHeaderStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  paddingBottom: '15px',
+  borderBottom: '1px solid #9c9c9c',
+  marginBottom: '15px',
 };
 
 const modalHeadingStyle = {
-  fontSize: '24px',
-  marginBottom: '10px',
-  color: '#2980b9',
+  fontSize: '26px',
+  margin: 0,
+  color: 'black',
+};
+
+const modalBodyStyle = {
+  lineHeight: '1.5',
+};
+
+const modalInfoStyle = {
+  fontSize: '18px',
+  padding: '15px 0',
+  color: 'black',
+};
+
+const modalTextStyle = {
+  fontSize: '18px',
+  color: '#1d5d88',
 };
 
 const modalLinkStyle = {
+  fontSize: '18px',
   textDecoration: 'none',
-  color: '#2980b9',
+  color: '#1d5d88',
+  fontWeight: '500',
 };
 
 const closeButtonStyle = {
-  backgroundColor: '#2980b9',
-  color: '#fff',
+  background: 'transparent',
   border: 'none',
-  padding: '10px 15px',
-  borderRadius: '5px',
   cursor: 'pointer',
-  fontSize: '16px',
-  marginTop: '10px',
+  fontSize: '30px',
+  color: '#888',
+  transition: 'color 0.3s',
 };
+
+closeButtonStyle[':hover'] = {
+  color: '#c0392b', // Color change on hover
+};
+
+// Optional: Add CSS transition to the modal to fade in/out
+const modalAnimationStyle = {
+  animation: 'fadeIn 0.3s ease-out',
+};
+
+const mediaQueryStyle = `
+  @media (max-width: 700px) {
+    .modal-content {
+      width: 90%; // 90% width when screen width is less than 700px
+    }
+  }
+`;
+
+
+// Add CSS for animations
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+`, styleSheet.cssRules.length, mediaQueryStyle);
 
 export default App;
